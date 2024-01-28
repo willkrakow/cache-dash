@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Box, Drawer, Grid, List, ListItemButton } from '@mui/material'
+import { Box, Drawer, Grid, List, ListItemButton, Typography } from '@mui/material'
+import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,17 +17,35 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Drawer open anchor="left" variant="permanent">
-          <List>
-            <ListItemButton>Home</ListItemButton>
-            <ListItemButton>Data</ListItemButton>
-            <ListItemButton>Settings</ListItemButton>
-          </List>
-        </Drawer>
-        <Box p={2}>
-          {children}
-          </Box>
+      <body>
+        <Grid container>
+          <Grid item xs={12} md={3} lg={1}>
+            <Drawer open anchor="left" variant="permanent">
+              <List>
+                <ListItemButton>
+                  <Link href={"/"}>
+                    <Typography variant="body1">Home</Typography>
+                  </Link>
+                </ListItemButton>
+                <ListItemButton>
+                  <Link href={"/teams"}>
+                    <Typography variant="body1">Teams</Typography>
+                  </Link>
+                </ListItemButton>
+                <ListItemButton>
+                  <Link href={"/players"}>
+                    <Typography variant="body1">
+                      Players</Typography></Link>
+                </ListItemButton>
+              </List>
+            </Drawer>
+          </Grid>
+          <Grid item xs={12} md={8} lg={10}>
+            <Box p={2}>
+              {children}
+            </Box>
+          </Grid>
+        </Grid>
       </body>
     </html>
   );
